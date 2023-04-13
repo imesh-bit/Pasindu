@@ -71,7 +71,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                        <version>2.22.2</version>
                          <configuration>
-                           <!-- Configuration for the Surefire plugin -->
+                            <testSourceDirectory>src/test/java</testSourceDirectory>
                      </configuration>
         </plugin>
 		</plugins>
