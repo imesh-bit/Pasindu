@@ -20,6 +20,11 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '8'
+          
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+            node-version: 16
 
       - name: Build with Maven
         run: mvn clean install
@@ -29,6 +34,7 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.war'
+          
 
   deploy:
     runs-on: windows-latest
