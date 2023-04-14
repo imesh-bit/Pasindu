@@ -22,7 +22,8 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
           
-   
+      - name: Resolve Maven dependencies
+        run: mvn dependency:resolve
 
       - name: Build with Maven
         run: mvn clean install
