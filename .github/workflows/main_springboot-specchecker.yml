@@ -55,3 +55,8 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2B1075B69D7A4191BEE7A961745C7B58 }}
           package: '*.war'
+          
+      - name: Build and deploy
+        run: |
+          ./mvnw clean install
+          java -jar target/my-app.jar --spring.datasource.url=${{ secrets.DB_URL }} --spring.datasource.password=${{ secrets.DB_PASSWORD }} --spring.datasource.username=${{ secrets.DB_USER }}
