@@ -60,4 +60,4 @@ jobs:
       - name: Build and deploy
         run: |
           ./mvnw clean install
-          java -jar target/excel-reader.war --spring.datasource.url=jdbc:mysql://localhost:3307/spec?createDatabaseIfNotExist=true --spring.datasource.password=${{ secrets.DB_PASSWORD }} --spring.datasource.username=${{ secrets.DB_USER }}
+          java -jar target/excel-reader.war --spring.datasource.url=jdbc:mysql://localhost:3307/spec?createDatabaseIfNotExist=true --spring.datasource.password=${{ secrets.DB_PASSWORD }} --spring.datasource.username=${{ secrets.DB_USER }}--server.port=8082
