@@ -54,14 +54,7 @@ jobs:
 #         run: az login --service-principal -u "$(cat client_id.txt)" -p "$(cat client_secret.txt)" -t "$(cat tenant_id.txt)"
 
       -  name: Deploy to Azure Web App
-         uses: azure/webapps-deploy@v2
-         app-name: springboot-specchecker
-         resource-group: DefaultResourceGroup-CAU
-         type: war
-         repo-url: https://github.com/imesh-bit/pasindu
-         branch: main
-         slot-name: production
-  
+         run: az webapp deployment source config-zip --name <web-app-name> --resource-group <resource-group-name> --src https://github.com/imesh-bit/pasindu/archive/main.zip
 
       - name: Build and deploy
         run: |
