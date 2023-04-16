@@ -52,12 +52,13 @@ jobs:
           echo ${{ secrets.AZURE_CLIENT_ID }} > client_id.txt
           echo ${{ secrets.AZURE_CLIENT_SECRET }} > client_secret.txt
 
-      
+      - name: Log in to Azure
+        run: az login --service-principal -u "$(cat client_id.txt)" -p "$(cat client_secret.txt)" -t "$(cat tenant_id.txt)"
 
-      - name: Deploy to Azure
-        run: az webapp deploy --subscription "$(cat subscription_id.txt)" --springboot-specchecker --resource-group DefaultResourceGroup-CAU --src-path https://github.com/imesh-bit/pasindu
+      - name: Deploy to Azure Web App
+        run: az webapp deploy --subscription "$(cat subscription_id.txt)" --name springboot-specchecker --resource-group DefaultResourceGroup-CAU --type WAR --path '${{ github.workspace }}/target/*.war'
 
       - name: Build and deploy
         run: |
           ./mvnw clean install
-          java -jar target/excel-reader.war -spring.datasource.url=jdbc:sqlserver://specchecker.database.windows.net:1433;database=specchecker;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30 -Dspring.datasource.password=Pasi992062290# -Dspring.datasource.username=admin123 -Dserver.port=1433
+          java -jar target/excel-reader.war --spring.datasource.url=jdbc:sqlserver://specchecker.database.windows.net:1433;database=specchecker;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30; --spring.datasource.password=Pasi992062290# --spring.datasource.username=admin123 --server.port=1433
