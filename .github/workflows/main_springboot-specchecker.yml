@@ -7,57 +7,33 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Java version
-        uses: actions/setup-java@v2
-        with:
-          java-version: '8'
-          distribution: 'temurin'
-          
-      - name: Resolve Maven dependencies
-        run: mvn dependency:resolve
-
-      - name: Build with Maven
-        run: mvn clean install
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: java-app
-          path: '${{ github.workspace }}/target/*.war'
-          
-
   deploy:
     runs-on: windows-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
+    
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: java-app
-
-      - name: Set up Azure credentials
-        run: |
-          echo ${{ secrets.AZURE_SUBSCRIPTION_ID }} > subscription_id.txt
-          echo ${{ secrets.AZURE_TENANT_ID }} > tenant_id.txt
-          echo ${{ secrets.AZURE_CLIENT_ID }} > client_id.txt
-          echo ${{ secrets.AZURE_CLIENT_SECRET }} > client_secret.txt
-      - name: Log in to Azure with service principal
-        run: az login --service-principal -u "$(cat client_id.txt)" -p "$(cat client_secret.txt)" -t "$(cat tenant_id.txt)"
-
-      - name: Deploy to Azure Web App
-        run: az webapp deploy --subscription "$(cat subscription_id.txt)" --name springboot-specchecker --resource-group DefaultResourceGroup-CAU --type WAR --path '${{ github.workspace }}/target/*.war'
-
-      - name: Build and deploy
-        run: |
-          ./mvnw clean install
-          java -jar target/excel-reader.war --spring.datasource.url=jdbc:sqlserver://specchecker.database.windows.net:1433;database=specchecker;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30; --spring.datasource.password=Pasi992062290# --spring.datasource.username=admin123 --server.port=1433
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Set up Azure credentials
+      run: |
+        echo ${{ secrets.AZURE_CLIENT_ID }} > client_id.txt
+        echo ${{ secrets.AZURE_CLIENT_SECRET }} > client_secret.txt
+        echo ${{ secrets.AZURE_TENANT_ID }} > tenant_id.txt
+        $client_id = Get-Content -Path "client_id.txt"
+        $client_secret = Get-Content -Path "client_secret.txt"
+        $tenant_id = Get-Content -Path "tenant_id.txt"
+        az login --service-principal -u $client_id -p $client_secret -t $tenant_id
+    
+    - name: Install dependencies
+      run: |
+        cd ./path/to/your/nodejs/app
+        npm ci
+    
+    - name: Build and deploy
+      run: |
+        cd ./path/to/your/nodejs/app
+        npm run build
+        # Add your deployment commands here
+        
+    - name: Log out from Azure
+      run: az logout
