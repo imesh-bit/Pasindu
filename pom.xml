@@ -78,12 +78,12 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>mssql-jdbc</artifactId>
-			<version>12.2.0</version> <!-- Replace with the actual version number of the JDBC driver you downloaded -->
-			<scope>system</scope>
-			<systemPath>D:/excel-reader/lib/mssql-jdbc-12.2.0.jre8.jar</systemPath> <!-- Update with the actual file path of the JAR file -->
-		</dependency>
+        <groupId>com.microsoft.sqlserver</groupId>
+        <artifactId>mssql-jdbc</artifactId>
+        <version>12.2.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/lib/mssql-jdbc-12.2.0.jre8.jar</systemPath>
+    </dependency>
 
 
 	</dependencies>
