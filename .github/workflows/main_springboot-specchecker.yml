@@ -61,7 +61,4 @@ jobs:
       - name: Build and deploy
         run: |
           ./mvnw clean install
-          java -jar target/excel-reader.war --spring.datasource.url=jdbc:sqlserver://specchecker.database.windows.net:1433;database=specchecker;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-          --spring.datasource.password=Pasi992062290#
-          --spring.datasource.username=admin123
-          --server.port=1433
+          java -jar target/excel-reader.war -spring.datasource.url=jdbc:sqlserver://specchecker.database.windows.net:1433;database=specchecker;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30 -Dspring.datasource.password=Pasi992062290# -Dspring.datasource.username=admin123 -Dserver.port=1433
