@@ -58,7 +58,8 @@ jobs:
 
       - name: Build and deploy
         run: |
-         ./mvnw clean install
+         .\mvnw clean install
+
          java -jar target/springboot-specchecker.war \
           --spring.datasource.url=jdbc:sqlserver://example.database.windows.net:1433;
           database=your_database_name;encrypt=true;
