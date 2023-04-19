@@ -55,9 +55,6 @@ jobs:
 #          run: az webapp deployment source config-zip --name springboot-spec*** --resource-group DefaultResourceGroup-CAU --src https://github.com/imesh-bit/pasindu/archive/main.zip
 
 
-      - name: Build and deploy
-        run: |
-         .\mvnw clean install
 
             
 
