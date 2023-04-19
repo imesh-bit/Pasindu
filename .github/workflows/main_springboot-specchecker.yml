@@ -61,9 +61,9 @@ jobs:
          .\mvnw clean install
 
              java -jar target/springboot-specchecker.war \
-             --spring.datasource.url=jdbc:sqlserver://example.database.windows.net:1433;database=your_database_name;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30 \
-              --spring.datasource.password=Pasi992062290# \
-               --spring.datasource.username=admin123 \
-              --server.port=1433
+             -- spring.datasource.url=jdbc:sqlserver://example.database.windows.net:1433;database=your_database_name;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30 \
+             --spring.datasource.password=Pasi992062290# \
+             --spring.datasource.username=admin123 \
+             --server.port=1433
 
 
