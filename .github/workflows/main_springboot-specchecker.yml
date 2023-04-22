@@ -5,6 +5,7 @@ on:
     branches:
       - main
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: windows-latest
@@ -48,14 +49,18 @@ jobs:
           echo ${{ secrets.AZURE_TENANT_ID }} > tenant_id.txt
           echo ${{ secrets.AZURE_CLIENT_ID }} > client_id.txt
           echo ${{ secrets.AZURE_CLIENT_SECRET }} > client_secret.txt
-#       - name: Log in to Azure with service principal
-#         run: az login --service-principal -u "$(cat client_id.txt)" -p "$(cat client_secret.txt)" -t "$(cat tenant_id.txt)"
 
-#       -  name: Deploy to Azure Web App
-#          run: az webapp deployment source config-zip --name springboot-spec*** --resource-group DefaultResourceGroup-CAU --src https://github.com/imesh-bit/pasindu/archive/main.zip
+      - name: Log in to Azure with service principal
+        uses: azure/login@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
 
+      - name: Set up Azure CLI
+        uses: azure/CLI@v1
 
-
-            
-
-
+#       - name: Deploy to Azure Web App
+#         run: |
+#           az webapp deployment source config-zip \
+#             --name <your-web-app-name> \
+#             --resource-group <your-resource-group-name> \
+#             --src ./java-app/*.war
