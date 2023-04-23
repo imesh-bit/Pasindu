@@ -34,7 +34,7 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -48,6 +48,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'springboot-specchecker'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D7CCEA71DAB7437389AEEA144A4A9F76 }}
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_fcd70d5812f148bbbb69117c02e0f292 }}
           package: '*.war'
