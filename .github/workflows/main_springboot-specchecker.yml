@@ -53,6 +53,8 @@ jobs:
               "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}",
               "tenantId": "${{ secrets.AZURE_TENANT_ID }}"
             }
+      - name: Install Az CLI
+        uses: azure/CLI@v1
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
