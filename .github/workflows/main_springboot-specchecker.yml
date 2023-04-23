@@ -56,6 +56,7 @@ jobs:
 
       - name: Deploy to Azure Web App
         run: |
-         az webapp deployment source config-zip --resource-group DefaultResourceGroup-CAU --name Specchecker-frontend --src app.zip
+         az webapp deployment source config-zip --resource-group DefaultResourceGroup-CAU --name Specchecker-frontend --src D:/excel-reader/target/app.zip
+
 
         
