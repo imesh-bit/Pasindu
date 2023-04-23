@@ -45,12 +45,12 @@ jobs:
 
      
 
-#       - name: Set up Azure credentials
-#         run: |
-#           echo ${{ secrets.AZURE_SUBSCRIPTION_ID }} > subscription_id.txt
-#           echo ${{ secrets.AZURE_TENANT_ID }} > tenant_id.txt
-#           echo ${{ secrets.AZURE_CLIENT_ID }} > client_id.txt
-#           echo ${{ secrets.AZURE_CLIENT_SECRET }} > client_secret.txt
+      - name: Set up Azure credentials
+        run: |
+          echo ${{ secrets.AZURE_SUBSCRIPTION_ID }} > subscription_id.txt
+          echo ${{ secrets.AZURE_TENANT_ID }} > tenant_id.txt
+          echo ${{ secrets.AZURE_CLIENT_ID }} > client_id.txt
+          echo ${{ secrets.AZURE_CLIENT_SECRET }} > client_secret.txt
 
 #       - name: Set up Azure credentials and login
 #         uses: azure/login@v1
