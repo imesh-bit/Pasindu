@@ -1,3 +1,6 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
 name: Build and deploy WAR app to Azure Web App - springboot-specchecker
 
 on:
@@ -9,17 +12,14 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+
     steps:
       - uses: actions/checkout@v2
 
       - name: Set up Java version
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v1
         with:
           java-version: '8'
-          distribution: 'temurin'
-          
-      - name: Resolve Maven dependencies
-        run: mvn dependency:resolve
 
       - name: Build with Maven
         run: mvn clean install
@@ -31,28 +31,23 @@ jobs:
           path: '${{ github.workspace }}/target/*.war'
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
           name: java-app
 
-#       - name: Set up Azure credentials
-#         run: |
-#           echo ${{ secrets.AZURE_SUBSCRIPTION_ID }} > subscription_id.txt
-#           echo ${{ secrets.AZURE_TENANT_ID }} > tenant_id.txt
-#           echo ${{ secrets.AZURE_CLIENT_ID }} > client_id.txt
-#           echo ${{ secrets.AZURE_CLIENT_SECRET }} > client_secret.txt
-          
       - name: Deploy to Azure Web App
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'springboot-specchecker'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: '${{ github.workspace }}/target/*.war'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D7CCEA71DAB7437389AEEA144A4A9F76 }}
+          package: '*.war'
