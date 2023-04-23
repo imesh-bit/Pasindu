@@ -56,7 +56,6 @@ jobs:
 
       - name: Deploy to Azure Web App
         run: |
-          az webapp deployment source config-zip \
-            --name springboot-specchecker \
-            --resource-group DefaultResourceGroup-CAU \
-            --src ./java-app/*.war
+         az webapp deployment source config-zip --resource-group DefaultResourceGroup-CAU --name Specchecker-frontend --src app.zip
+
+        
