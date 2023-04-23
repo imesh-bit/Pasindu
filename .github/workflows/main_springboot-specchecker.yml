@@ -44,7 +44,7 @@ jobs:
           name: java-app
       - name: Install Azure CLI
         run: |
-            curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+            curl -sL https://aka.ms/InstallAzureCLIDeb
                 az --version
 
       - name: Login to Azure
