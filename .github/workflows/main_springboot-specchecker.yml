@@ -48,7 +48,7 @@ jobs:
           echo ${{ secrets.AZURE_TENANT_ID }} > tenant_id.txt
           echo ${{ secrets.AZURE_CLIENT_ID }} > client_id.txt
           echo ${{ secrets.AZURE_CLIENT_SECRET }} > client_secret.txt
-
+          
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
