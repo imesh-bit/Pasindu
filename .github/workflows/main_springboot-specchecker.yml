@@ -52,10 +52,10 @@ jobs:
           echo ${{ secrets.AZURE_CLIENT_ID }} > client_id.txt
           echo ${{ secrets.AZURE_CLIENT_SECRET }} > client_secret.txt
 
-      - name: Set up Azure credentials and login
-        uses: azure/login@v1
-        with:
-             creds: ${{ secrets.AZURE_CREDENTIALS }}
+#       - name: Set up Azure credentials and login
+#         uses: azure/login@v1
+#         with:
+#              creds: ${{ secrets.AZURE_CREDENTIALS }}
 
 
       - name: Deploy to Azure Web App
