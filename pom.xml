@@ -11,7 +11,7 @@
 	<groupId>com.excel</groupId>
 	<artifactId>excel-reader</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>excel-reader</name>
 	<description>excel reader</description>
 	<properties>
